@@ -35,15 +35,13 @@ A React-based quiz building and management application that allows users to crea
    
    Create a `.env` file in the root directory with the following variables:
    ```
-   VITE_SUPABASE_URL=your_supabase_url
-   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+   By default is setup to run locally with the Adaptus2-Server running on port 3000
+   https://adaptus2-framework.com/
+
    ```
 
-4. Set up Supabase:
-   - Create a new Supabase project
-   - Run the migration script located in `supabase/migrations/` to set up the database schema
-   - Configure authentication in your Supabase dashboard
-
+4. Set up Create the table and add apiConfig.json entries provided in schema.sql
+   
 ## Development
 
 Start the development server:
