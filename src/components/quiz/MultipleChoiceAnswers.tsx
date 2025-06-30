@@ -1,6 +1,6 @@
 import React from 'react';
 import { PlusCircle, Trash2, GripVertical, Image as ImageIcon } from 'lucide-react';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
 import { Answer } from '../../types';
 import Button from '../ui/Button';
 import Input from '../ui/Input';
@@ -17,6 +17,7 @@ const MultipleChoiceAnswers: React.FC<MultipleChoiceAnswersProps> = ({ answers, 
       answer_id: uuidv4(),
       answer: '',
       image: '',
+      score: 0,
       order: answers.length,
     };
     onUpdate([...answers, newAnswer]);
@@ -45,7 +46,14 @@ const MultipleChoiceAnswers: React.FC<MultipleChoiceAnswersProps> = ({ answers, 
     onUpdate(updatedAnswers);
   };
 
-  const handleDragEnd = (result: any) => {
+  const handleScoreChange = (index: number, value: string) => {
+    const updatedAnswers = [...answers];
+    const score = parseInt(value, 10) || 0;
+    updatedAnswers[index] = { ...updatedAnswers[index], score };
+    onUpdate(updatedAnswers);
+  };
+
+  const handleDragEnd = (result: DropResult) => {
     if (!result.destination) return;
     
     const items = Array.from(answers);
@@ -129,6 +137,16 @@ const MultipleChoiceAnswers: React.FC<MultipleChoiceAnswersProps> = ({ answers, 
                                 onChange={(e) => handleImageChange(index, e.target.value)}
                                 placeholder="Image URL (optional)"
                                 fullWidth
+                              />
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <span className="text-sm font-medium text-gray-600 min-w-[50px]">Score:</span>
+                              <Input
+                                type="number"
+                                value={answer.score?.toString() || '0'}
+                                onChange={(e) => handleScoreChange(index, e.target.value)}
+                                placeholder="0"
+                                className="w-24"
                               />
                             </div>
                             {answer.image && (

@@ -10,6 +10,10 @@ CREATE TABLE `quizzes` (
   KEY `idx_quiz_id` (`quiz_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Note: The questions column stores JSON data with the following structure:
+-- Each answer object within a question now includes a 'score' field (integer, default 0)
+-- Example answer structure: { "answer_id": "uuid", "answer": "text", "image": "url", "score": 0, "order": 0 }
+
 
 // apiConfig.json
 {

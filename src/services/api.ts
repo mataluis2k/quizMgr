@@ -109,6 +109,8 @@ export const quizApi = {
           question_answers: q.question_answers.map(a => ({
             answer_id: a.answer_id,
             answer: a.answer,
+            image: a.image,
+            score: a.score,
             order: a.order
           }))
         }))

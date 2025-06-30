@@ -24,6 +24,7 @@ export interface Answer {
   answer_id?: string;
   answer: string;
   image?: string;
+  score: number;
   order: number;
 }
 
